@@ -5,17 +5,15 @@ const Clarafai = require('clarifai');
 
 // api call to claifai
 const clarifaiApp = new Clarafai.App({
-  apiKey: '436b9296b0764b059f32468bf5d04436'
+  apiKey: process.env.API_CLARIFAI
 })
 
 // init database
 const db = knex({
     client: 'pg',
     connection: {
-        host: '127.0.0.1',
-        user: 'smartbrain',
-        password: 'smartbrain',
-        database: 'smartbraindb'
+        connectString: process.env.DATABASE_URL,
+        ssl: true
     }
 });
 
