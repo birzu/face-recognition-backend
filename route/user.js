@@ -96,7 +96,8 @@ router.post('/register', (req, res) => {
       .catch(trx.rollback)
     })
     .catch(error => res.status(400).json({
-      message: 'can not register, make sure to enter valid email username and password.'
+      message: 'can not register, make sure to enter valid email username and password.',
+      error: error
     }));
   }
 });
