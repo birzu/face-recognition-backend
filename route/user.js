@@ -2,13 +2,6 @@ const express = require('express');
 const knex = require('knex');
 const bcrypt = require('bcrypt-nodejs');
 const Clarafai = require('clarifai');
-const { Client } = require('pg');
-
-// db client
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true
-});
 
 // api call to claifai
 const clarifaiApp = new Clarafai.App({
@@ -17,7 +10,8 @@ const clarifaiApp = new Clarafai.App({
 
 // init database
 const db = knex({
-    client: client
+    client: 'pg',
+    connection: process.env.DATABASE_URL
 });
 
 // console.log(db.select('*').from('users')); ------- CONNECTED
