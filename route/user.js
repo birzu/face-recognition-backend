@@ -64,11 +64,11 @@ router.post('/signin', (req, res) => {
             message: 'Success',
             userProfile: profileData[0]
           }))
-          .catch(error => res.status(400).json({ message: 'failed to get userprofile'}))
+          .catch(error => res.status(400).json({ message: 'something went wrong, sign in failed'}))
         : res.status(401).json({ message: 'unauthorized' })
-      : res.status(400).json({ message: 'failed to get userprofile'})
+      : res.status(400).json({ message: 'something went wrong, sign in failed'})
     })
-    .catch(error => res.status(400).json({ message: 'failed to get userprofile'}))
+    .catch(error => res.status(400).json({ message: 'something went wrong, sign in failed'}))
 })
 
 // post --> user/register ==> for register page
