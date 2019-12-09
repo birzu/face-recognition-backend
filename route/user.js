@@ -1,6 +1,12 @@
 const express = require('express');
 const knex = require('knex');
 const bcrypt = require('bcrypt-nodejs');
+const Clarafai = require('clarifai');
+
+// api call to claifai
+const clarifaiApp = new Clarafai.App({
+  apiKey: '436b9296b0764b059f32468bf5d04436'
+})
 
 // init database
 const db = knex({
@@ -21,6 +27,22 @@ const router = express.Router();
 /*********************
 ******* ROUTES *******
 *********************/
+
+// api call from frontend 
+router.post('/detect', async (req, res) => {
+  try {
+    const { srcUrl } = req.body;
+    const faceModel = await clarifaiApp.models.initModel({ id: Clarafai.FACE_DETECT_MODEL });
+    const apiResponse = await faceModel.predict(srcUrl);
+    if (apiResponse) {
+      res.json(apiResponse);
+    }
+  } catch(error) {
+    if (error) {
+      res.status(400).json({ message: 'failed to detect face model'})
+    }
+  }
+})
 
 // get --> user/profile/:id ===> fetchs the user profile
 router.get('/profile/:id', (req, res) => {
