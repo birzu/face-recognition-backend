@@ -26,6 +26,11 @@ const router = express.Router();
 ******* ROUTES *******
 *********************/
 
+// home route
+router.get('/', (req, res) => {
+  res.send('FACE-RECOGNITION-API\nRequest to /user/detect with src url to get face detection info in an image')
+})
+
 // api call from frontend 
 router.post('/detect', async (req, res) => {
   try {
@@ -82,7 +87,7 @@ router.post('/register', (req, res) => {
     });
   } else {
     db.transaction(trx => {
-      trx.insert( {hash: hash,email: email} )
+      trx.insert( {hash: hash, email: email} )
       .into('login')
       .returning('email')
       .then(loginEmail => {
