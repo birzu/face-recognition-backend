@@ -12,7 +12,7 @@ const clarifaiApp = new Clarafai.App({
 const db = knex({
     client: 'pg',
     connection: {
-        connectString: process.env.DATABASE_URL,
+        connectString: 'postgres://coggwtrvswlrgd:3783c22a0ba1161c84ba1d929942b2f593c921b9f2458fea5ef413e0d743065d@ec2-174-129-254-218.compute-1.amazonaws.com:5432/db9i7q4jhoc019',
         ssl: true
     }
 });
